@@ -1,5 +1,11 @@
+import { Company, Job } from "./db.js";
+
 export const resolvers = {
   Query: {
-    greeting: () => "This is the greeting message from the resolver.",
+    jobs: async () => Job.findAll(),
+  },
+
+  Job: {
+    company: async (job) => Company.findById(job.companyId),
   },
 };
