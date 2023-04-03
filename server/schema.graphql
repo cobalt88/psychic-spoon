@@ -4,7 +4,13 @@
 type Query {
   # Make sure to return a list of job objects instead of just one job object
   jobs: [Job!]
+  job(id: ID!): Job
   companies: [Company!]
+  company(id: ID!): Company
+}
+
+type Mutation {
+  createJob(title: String!, companyId: ID!, description: String): Job
 }
 
 # Job type represents a single job listing and is used to define the shape of the Job objects returned by the jobs query
@@ -21,5 +27,5 @@ type Company {
   id: ID! 
   name: String!
   description: String
-  jobs: [Job]
-}
+  jobs: [Job!]
+} 

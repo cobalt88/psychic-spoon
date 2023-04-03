@@ -6,8 +6,16 @@ import { Company, Job } from "./db.js";
 export const resolvers = {
   // These resolvers are triggered when you request a field on the Query type.
   Query: {
+    job: async (_root, args) => Job.findById(args.id),
     jobs: async () => Job.findAll(),
+    company: async (_root, args) => Company.findById(args.id),
     companies: async () => Company.findAll(),
+  },
+
+  Mutations: {
+    createJob: async (_root, { title, companyId, description }) => {
+      return Job.create({ title, companyId, description });
+    },
   },
 
   // These resolvers are triggered when you request a field on the Job type.
@@ -17,6 +25,6 @@ export const resolvers = {
   },
 
   Company: {
-    jobs: async (company) => Job.findById(company.jobId),
+    jobs: async (company) => Job.findAll((job) => job.companyId === company.id),
   },
 };
