@@ -1,11 +1,8 @@
 import { ApolloServer } from "apollo-server-express";
-
 import cors from "cors";
 import express from "express";
 import { expressjwt } from "express-jwt";
-
 import { readFile } from "fs/promises";
-
 import jwt from "jsonwebtoken";
 import { User } from "./db.js";
 import { resolvers } from "./resolvers.js";
